@@ -357,10 +357,10 @@
 - (BOOL) deleteAllLocations:(NSError * __autoreleasing *)outError
 {
     __block BOOL success;
-    NSString *sql = @"UPDATE " @LC_TABLE_NAME @" SET " @LC_COLUMN_NAME_STATUS @" = ?";
+    NSString *sql = @"UPDATE " @LC_TABLE_NAME @" SET " @LC_COLUMN_NAME_STATUS @" = 0";
 
     [queue inDatabase:^(FMDatabase *database) {
-        if ([database executeUpdate:sql], [NSString stringWithFormat:@"%ld", MAURLocationDeleted]) {
+        if ([database executeUpdate:sql]) {	
             success = YES;
         } else {
             int errorCode = [database lastErrorCode];
